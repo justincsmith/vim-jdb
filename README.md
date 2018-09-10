@@ -9,7 +9,7 @@ It requires VIM >= 8.0 and VIM compiled with `channel`, `signs` and `job` suppor
 
 1. `cd ~/.vim/plugin`
 2. `git clone https://gitlab.com/Dica-Developer/vim-jdb`
-3. 
+3. restart Vim
 
 ## How to use
 
