@@ -51,7 +51,9 @@ sign define currentline text=-> texthl=Search
 
 let s:job = ''
 let s:channel = ''
-let s:max_signed_int = 2147483648
+if !exists("s:max_signed_int")
+  let s:max_signed_int = 2147483648
+endif
 lockvar s:max_signed_int
 
 function! s:hash(name, linenumber)
