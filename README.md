@@ -5,6 +5,12 @@ It marks by vim-jdb setted breakpoints and shows the current file and line the d
 
 It requires VIM >= 8.0 and VIM compiled with `channel`, `signs` and `job` support.
 
+## Installation
+
+1. `cd ~/.vim/plugin`
+2. `git clone https://gitlab.com/Dica-Developer/vim-jdb`
+3. 
+
 ## How to use
 
 1. start JAVA process with the following debug agent option, e.g. `-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
