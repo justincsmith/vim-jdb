@@ -37,6 +37,7 @@ command! JDBStepUp call s:stepUp()
 command! JDBStepI call s:stepI()
 command! JDBToggleWatchWindow call s:toggleWatchWindow()
 command! -nargs=1 JDBCommand call s:command(<f-args>)
+command! JDBToggleBreakpointOnLine call s:toggleBreakpointOnLine(expand('%:~:.'), line('.'))
 
 if has('multi_byte') && has('unix') && &encoding == 'utf-8' && (empty(&termencoding) || &termencoding == 'utf-8')
   " ⭙  ⬤  ⏺  ⚑  ⛔
@@ -212,6 +213,26 @@ function! s:detach()
       exe win . 'wincmd w'
       exe 'close'
     endif
+  endif
+endfunction
+
+function! s:toggleBreakpointOnLine(fileName, lineNumber)
+  let l:found = 0
+  let l:breakpoints = split(execute('sign place file='. a:fileName), '\n')
+  for line in l:breakpoints
+    let l:lineparts = split(line, ' ')
+    if 5 == len(l:lineparts) && -1 < stridx(l:lineparts[4], 'ame=breakpoint')
+      let l:lineNumber = split(l:lineparts[0], '=')[1]
+      if a:lineNumber == l:lineNumber
+        let l:found = 1
+      endif
+    endif
+  endfor
+
+  if l:found
+    call s:clearBreakpointOnLine(a:fileName, a:lineNumber)
+  else
+    call s:breakpointOnLine(a:fileName, a:lineNumber)
   endif
 endfunction
 

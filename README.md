@@ -24,6 +24,7 @@ It requires VIM >= 8.0 and VIM compiled with `channel`, `signs` and `job` suppor
 | ------------- |:-------------:|
 |JDBAttach|attach to a running JVM with a debug listener on localhost:5005, can be overwritten by given host:port as an argument|
 |JDBDetach|detach the debugger UI from the application that is currently debugged|
+|JDBToggleBreakpointOnLine|toggle the breakpoint on the current line|
 |JDBBreakpointOnLine|set a breakpoint on the current line|
 |JDBClearBreakpointOnLine|clear the breakpoint on the current line|
 |JDBContinue|continues the execution until the next breakpoint|
