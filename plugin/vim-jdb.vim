@@ -132,6 +132,7 @@ function! JdbOutHandler(channel, msg)
   if -1 < stridx(a:msg, 'The application exited')
     echom "Debugging stopped"
     exe 'sign unplace 2'
+    call s:removeAllPreviousSetSigns()
     let s:channel = ''
     let s:job = ''
     let s:running = 0
@@ -205,6 +206,7 @@ endfunction
 function! s:detach()
   if s:job != '' && job_status(s:job) == 'run'
     exe 'sign unplace 2'
+    call s:removeAllPreviousSetSigns()
     call ch_sendraw(s:channel, "exit\n")
     let s:channel = ''
     let s:job = ''
@@ -312,6 +314,17 @@ function! s:applyBreakPoints(channel, name)
         let l:lineNumber = split(l:lineparts[0], '=')[1]
         call s:breakpointOnLine(l:fileName, l:lineNumber)
       endif
+    endif
+  endfor
+endfunction
+
+function! s:removeAllPreviousSetSigns()
+  let l:breakpoints = split(execute('sign place'), '\n')
+  for line in l:breakpoints
+    let l:lineparts = split(line, ' ')
+    if 5 == len(l:lineparts) && -1 < stridx(l:lineparts[4], 'ame=breakpoint')
+      let l:signId = split(l:lineparts[2], '=')[1]
+      exe 'sign unplace '. l:signId
     endif
   endfor
 endfunction
