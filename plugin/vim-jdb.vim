@@ -139,7 +139,7 @@ function! JdbOutHandler(channel, msg)
     let win = bufwinnr('_JDB_SHELL_')
     if win != -1
       exe win . 'wincmd w'
-      exe 'close'
+      exe 'bwipeout'
     endif
   endif
 endfunction
@@ -213,7 +213,7 @@ function! s:detach()
     let win = bufwinnr('_JDB_SHELL_')
     if win != -1
       exe win . 'wincmd w'
-      exe 'close'
+      exe 'bwipeout'
     endif
   endif
 endfunction
@@ -292,7 +292,7 @@ function! s:toggleWatchWindow()
   let win = bufwinnr('_JDB_WATCH_')
   if win != -1
     exe win . 'wincmd w'
-    exe 'close'
+    exe 'bwipeout'
   else
     call s:openWindow('_JDB_WATCH_', 'vertical', 15)
   endif
