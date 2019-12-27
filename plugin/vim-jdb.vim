@@ -90,7 +90,7 @@ function! JdbOutHandler(channel, msg)
     let l:filename = join(split(l:filename, '\.'), '/')
     let l:linenumber = substitute(l:breakpoint[2], ',\|\.\| \|bci=\d*\|line=', '', 'g')
     if l:filename != expand('%')
-      exe 'e +%foldopen! **/'. l:filename .'.java'
+      exe 'e +set\ nofoldenable **/'. l:filename .'.java'
     endif
     exe l:linenumber
     exe 'sign unplace 2'
@@ -105,7 +105,7 @@ function! JdbOutHandler(channel, msg)
     let l:filename = join(split(l:filename, '\.'), '/')
     let l:linenumber = substitute(l:breakpoint[2], ',\|\.\| \|bci=\d*\|line=', '', 'g')
     if l:filename != expand('%')
-      exe 'e +%foldopen! **/'. l:filename .'.java'
+      exe 'e +set\ nofoldenable **/'. l:filename .'.java'
     endif
     exe l:linenumber
     exe 'sign unplace 2'
