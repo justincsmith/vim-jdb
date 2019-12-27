@@ -39,6 +39,8 @@ It requires VIM >= 8.0 and VIM compiled with `channel`, `signs` and `job` suppor
 |JDBStepUp|steps a level up in the stack|
 |JDBStepI|steps to the next instruction|
 |JDBCommand|send any JDB command to the application under debug|
+|JDBShowLocals|executes debugger locals command|
+|JDBPrintExpression|prints expression under cursor|
 
 ## Global variables
 

@@ -38,6 +38,8 @@ command! JDBStepI call s:stepI()
 command! JDBToggleWatchWindow call s:toggleWatchWindow()
 command! -nargs=1 JDBCommand call s:command(<f-args>)
 command! JDBToggleBreakpointOnLine call s:toggleBreakpointOnLine(expand('%:~:.'), line('.'))
+command! JDBShowLocals call s:showLocals()
+command! JDBPrintExpression call s:printExpression(expand('<cexpr>'))
 
 if has('multi_byte') && has('unix') && &encoding == 'utf-8' && (empty(&termencoding) || &termencoding == 'utf-8')
   " ⭙  ⬤  ⏺  ⚑  ⛔
@@ -327,5 +329,13 @@ function! s:removeAllPreviousSetSigns()
       exe 'sign unplace '. l:signId
     endif
   endfor
+endfunction
+
+function! s:showLocals()
+  call ch_sendraw(s:channel, "locals\n")
+endfunction
+
+function! s:printExpression(expression)
+  call ch_sendraw(s:channel, "eval ". a:expression ."\n")
 endfunction
 
