@@ -195,7 +195,7 @@ function! s:attach(...)
     call ch_sendraw(s:channel, "run\n")
     call ch_sendraw(s:channel, "monitor where\n")
 
-    call s:applyBreakPoints(s:channel, 'breakpoint')
+    call s:applyBreakPoints()
 
     " jump now back to original window and let it look like we never left
     call win_gotoid(l:orgwinid)
@@ -299,7 +299,7 @@ function! s:toggleWatchWindow()
   endif
 endfunction
 
-function! s:applyBreakPoints(channel, name)
+function! s:applyBreakPoints()
   let l:breakpoints = split(execute('sign place'), '\n')
   let l:fileName = ''
   for line in l:breakpoints
