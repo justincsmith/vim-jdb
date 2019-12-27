@@ -243,13 +243,12 @@ endfunction
 function! s:breakpointOnLine(fileName, lineNumber)
   "TODO check if we are on a java file and fail if not
 
+  let l:lineNumber = line('.')
+  let l:currentBuffer = bufnr('%')
+  exe 'sign place '. s:hash(expand("%:t"), str2nr(l:lineNumber)) .' line='. str2nr(l:lineNumber) .' name=breakpointnotconnected buffer='. l:currentBuffer
   if s:job != '' && job_status(s:job) == 'run'
     let fileName = s:getClassNameFromFile(a:fileName)
     call ch_sendraw(s:channel, "stop at " . fileName . ":" . a:lineNumber . "\n")
-  else
-    let l:lineNumber = line('.')
-    let l:currentBuffer = bufnr('%')
-    exe 'sign place '. s:hash(expand("%:t"), str2nr(l:lineNumber)) .' line='. str2nr(l:lineNumber) .' name=breakpointnotconnected buffer='. l:currentBuffer
   endif
 endfunction
 
